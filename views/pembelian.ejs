@@ -1,0 +1,22 @@
+<a href="/" class="btn btn-secondary mb-3">← Kembali</a>
+
+<h4>Form Pembelian</h4>
+
+<form method="POST" action="/pembelian" class="card p-4 shadow-sm">
+  <div class="mb-3">
+    <label for="produk" class="form-label">Produk</label>
+    <select name="produk_id" id="produk" class="form-select" required>
+      <option value="">-- Pilih Produk --</option>
+      <% produk.forEach(p => { %>
+        <option value="<%= p.id %>"><%= p.nama %> - Rp<%= p.harga %></option>
+      <% }) %>
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label for="jumlah" class="form-label">Jumlah</label>
+    <input type="number" name="jumlah" id="jumlah" class="form-control" min="1" required>
+  </div>
+
+  <button type="submit" class="btn btn-success">Submit</button>
+</form>

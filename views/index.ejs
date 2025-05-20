@@ -1,0 +1,46 @@
+<div class="d-flex justify-content-between mb-3">
+  <h4>Daftar Pembelian</h4>
+  <a href="/pembelian" class="btn btn-primary">+ Tambah Pembelian</a>
+</div>
+
+<table class="table table-bordered table-striped">
+  <thead class="table-dark">
+    <tr>
+      <th>ID</th>
+      <th>Produk</th>
+      <th>Jumlah</th>
+      <th>Status</th>
+      <th>Total Beli</th>
+      <th>Tanggal</th>
+      <th>Aksi</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% pembelian.forEach(p => { %>
+      <tr>
+        <td><%= p.id %></td>
+        <td><%= p.nama %></td>
+        <td><%= p.jumlah %></td>
+        <td>
+          <% if (p.status === 'dibatalkan') { %>
+            <span class="badge bg-danger">Dibatalkan</span>
+          <% } else { %>
+            <span class="badge bg-success">Dipesan</span>
+          <% } %>
+        </td>
+        <td><%= Number(p.total_beli).toLocaleString('id-ID', { style: 'currency', currency: 'IDR' }) %></td>
+
+        <td><%= p.tanggal.toLocaleString() %></td>
+        <td>
+          <% if (p.status !== 'dibatalkan') { %>
+            <form action="/cancel/<%= p.id %>" method="POST">
+              <button class="btn btn-sm btn-outline-danger" type="submit">Cancel</button>
+            </form>
+          <% } else { %>
+            <span class="text-muted">N/A</span>
+          <% } %>
+        </td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
